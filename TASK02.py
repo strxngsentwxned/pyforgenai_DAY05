@@ -19,7 +19,14 @@ with open("students.json", "r") as file:
 		average = sum(grades)/len(grades)
 		average.append(average_grades)
 		print(f"student["name"] average: {average}")
+	highest_average = max(average_grades)
+	print(f"{student["name"] has the highest average of {highest_average}!")
 
-highest_average = max(average_grades)
-print(f"{student["name"] has the highest average of {highest_average}!")
+#update score 
+for student in data["students"]:
+	if student["name"] == "Charlie":
+		student["grades"][1] = 93
+print(students_manager)
+
+
 	
