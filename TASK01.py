@@ -13,11 +13,12 @@ with open("todo.txt", "r") as file:
 print("Add item pls")
 
 with open("todo.txt", "a") as file:
-	file.write(input("what do you want to do?"))
+	new_item = input("what do you want to do?")
+	file.write(f"new_item \n")
 
 with open("todo.txt", "r") as file:
 	lines = file.readlines()
-	print("Updated list: \n")
+	print("\n Updated list: \n")
 	for i, lines in enumerate(lines,1):
 		print(f"{i}. {lines.strip()}")
 	
