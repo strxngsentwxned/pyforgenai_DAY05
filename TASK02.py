@@ -12,9 +12,14 @@ with open("students.json", "w") as file:
 	json.dump(student_manager, file, indent =4)
 
 with open("students.json", "r") as file:
+	average_grades = []
 	data = json.load(file)
 	for student in data["students"]:
 		grades = student["grades"]
 		average = sum(grades)/len(grades)
+		average.append(average_grades)
 		print(f"student["name"] average: {average}")
 
+highest_average = max(average_grades)
+print(f"{student["name"] has the highest average of {highest_average}!")
+	
