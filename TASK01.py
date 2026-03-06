@@ -19,7 +19,7 @@ with open("todo.txt", "r") as file:
 	lines = file.readlines()
 	print("Updated list: \n")
 	for i, lines in enumerate(lines,1):
-		print(f"{i}). {lines.strip()}")
+		print(f"{i}. {lines.strip()}")
 	
 	
 
