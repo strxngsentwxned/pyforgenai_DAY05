@@ -7,7 +7,7 @@ with open("todo.txt", "w") as file:
 
 with open("todo.txt", "r") as file:
 	lines = file.readlines()
-	for i, lines in enumerate(range(lines,1)):
+	for i, lines in enumerate(lines,1):
 		print(f"{i}). {lines.strip()}")
 
 print("Add item pls")
@@ -18,7 +18,7 @@ with open("todo.txt", "a") as file:
 with open("todo.txt", "r") as file:
 	lines = file.readlines()
 	print("Updated list: \n")
-	for i, lines in enumerate(range(lines,1)):
+	for i, lines in enumerate(lines,1):
 		print(f"{i}). {lines.strip()}")
 	
 	
