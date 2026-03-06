@@ -14,7 +14,7 @@ print("Add item pls")
 
 with open("todo.txt", "a") as file:
 	new_item = input("what do you want to do?")
-	file.write(f"new_item \n")
+	file.write(f"{new_item} \n")
 
 with open("todo.txt", "r") as file:
 	lines = file.readlines()
