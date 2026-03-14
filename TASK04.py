@@ -14,9 +14,12 @@ with open("data.txt", "r") as file:
 
 #convert to json
 with open("data.json", "w") as file:
-    json.dump(content, file, indent=4)
+    lines = content.strip().split('\n')
+    json.dump(lines, file, indent=4)
 
 #convert to csv
 with open("data.csv", "w") as file:
     writer = csv.writer(file)
-    writer.writerows(content)
+    lines = content.strip().split('\n')
+    for line in lines:
+        writer.writerow([line])
