@@ -62,4 +62,10 @@ def delete_file():
         print(f"File '{filename}' not found.")
 
 def list_txt_files():
-    
+    txt_files = [f for f in os.listdir() if f.endswith('.txt')]
+    if txt_files:
+        print("Text files in the current directory:")
+        for file in txt_files:
+            print(file)
+    else:
+        print("No .txt files found in the current directory.")
