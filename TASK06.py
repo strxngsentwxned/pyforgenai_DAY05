@@ -1,8 +1,5 @@
 import os
 
-while True:
-    menu()
-
 def menu():
     print("Menu:")
     print("1. Create new text file")
@@ -30,7 +27,7 @@ def menu():
 
 def create_file():
     filename = input("Enter the name of the file to create (with .txt extension): ")
-    with open(filename, 'w') as file:
+    with open(str(filename + ".txt"), 'w') as file:
         content = input("Enter the content to write to the file: ")
         file.write(content)
     print(f"File '{filename}' created successfully.")
@@ -38,7 +35,7 @@ def create_file():
 def read_file():
     filename = input("Enter the name of the file to read (with .txt extension): ")
     try:
-        with open(filename, 'r') as file:
+        with open(str(filename + ".txt"), 'r') as file:
             content = file.read()
             print(f"Content of '{filename}':\n{content}")
     except FileNotFoundError:
@@ -47,7 +44,7 @@ def read_file():
 def append_to_file():
     filename = input("Enter the name of the file to append to (with .txt extension): ")
     try:
-        with open(filename, 'a') as file:
+        with open(str(filename + ".txt"), 'a') as file:
             content = input("Enter the content to append to the file: ")
             file.write(content)
     except FileNotFoundError:
@@ -56,7 +53,7 @@ def append_to_file():
 def delete_file():
     filename = input("Enter the name of the file to delete (with .txt extension): ")
     try:
-        os.remove(filename)
+        os.remove(str(filename + ".txt"))
         print(f"File '{filename}' deleted successfully.")
     except FileNotFoundError:
         print(f"File '{filename}' not found.")
@@ -69,3 +66,6 @@ def list_txt_files():
             print(file)
     else:
         print("No .txt files found in the current directory.")
+
+while True:
+    menu()
