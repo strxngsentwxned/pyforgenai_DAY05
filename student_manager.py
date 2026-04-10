@@ -127,6 +127,17 @@ def update_student_scores():
             return
     print("Student not found!")
 
+def export_to_json():
+    with open('students.csv', 'r') as file:
+        reader = csv.DictReader(file)
+        students_list = list(reader)
+        with open('students.json', 'w') as file:
+            json.dump(students_list, file, indent=4)
+    print("Data exported to students.json successfully!")
+
+def export_to_csv():
+    print("Data exported to students.csv successfully!")
+
 while True: 
     choice = menu()
     if choice == 1:
@@ -139,3 +150,10 @@ while True:
         search_student()
     elif choice == 5:
         update_student_scores()
+    elif choice == 6:
+        export_to_json()
+    elif choice == 7:
+        export_to_csv()
+    else:
+        print('Thank you for using the Student Manager. Goodbye!')
+        break 
