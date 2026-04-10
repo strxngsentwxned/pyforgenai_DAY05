@@ -68,10 +68,64 @@ def calculate_statistics():
             eng_score_avg = sum(int(student['English']) for student in students)/num_students
             math_score_avg = sum(int(student['Math']) for student in students)/num_students
             sci_score_avg = sum(int(student['Science']) for student in students)/num_students
+            highest_math_score = max(int(student['Math']) for student in students)
+            highest_sci_score = max(int(student['Science']) for student in students)
+            highest_eng_score = max(int(student['English']) for student in students)
+            lowest_math_score = min(int(student['Math']) for student in students)
+            lowest_sci_score = min(int(student['Science']) for student in students)
+            lowest_eng_score = min(int(student['English']) for student in students)
+
+    print(f"Total number of students: {num_students}")
+    print('-'*50)
     print(f"Average Math score: {math_score_avg:.2f}")
     print(f"Average Science score: {sci_score_avg:.2f}")
     print(f"Average English score: {eng_score_avg:.2f}")
-    print(f"Total number of students: {num_students}")
+    print('-'*50)
+    print('Highest scores:')
+    print(f"Math: {highest_math_score}")
+    print(f"Science: {highest_sci_score}")
+    print(f"English: {highest_eng_score}")
+    print('-'*50)
+    print('Lowest scores:')
+    print(f"Math: {lowest_math_score}")
+    print(f"Science: {lowest_sci_score}")
+    print(f"English: {lowest_eng_score}")
+    print('-'*50)
+
+def search_student(students, query):
+    results = []
+    for student in students:
+        if query.lower() in student["Name"].lower() or query == student["StudentID"]:
+            results.append(student)
+    return results
+
+def update_student_scores():
+    student_id = input("Enter student ID to update: ")
+    students_list = []
+    with open('students.csv', 'r') as file:
+        reader = csv.DictReader(file)
+        students_list = list(reader)
+    
+    for student in students_list:
+        if student['StudentId'] == student_id:
+            new_math_score = input("Enter new Math score (0-100): ").strip()
+            new_sci_score = input("Enter new Science score (0-100): ").strip()
+            new_eng_score = input("Enter new English score (0-100): ").strip()
+            if new_math_score:
+                student['Math'] = new_math_score
+            if new_sci_score:
+                student['Science'] = new_sci_score
+            if new_eng_score:
+                student['English'] = new_eng_score
+            scores = [int(student["Math"]), int(student["Science"]), int(student["English"])]
+            student['Average'] = str(round(sum(scores) / len(scores), 2))
+            with open('students.csv', 'w', newline='') as file:
+                writer = csv.DictWriter(file, fieldnames=['StudentId', 'Name', 'Math', 'Science', 'English', 'Average'])
+                writer.writeheader()
+                writer.writerows(students_list)
+            print("Student scores updated successfully!")
+            return
+    print("Student not found!")
 
 while True: 
     choice = menu()
@@ -81,3 +135,7 @@ while True:
         view_all_students()
     elif choice == 3:
         calculate_statistics()
+    elif choice == 4:
+        search_student()
+    elif choice == 5:
+        update_student_scores()
