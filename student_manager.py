@@ -31,7 +31,9 @@ def menu():
     return choice 
 
 def add_student():
-    id = input("Enter student ID: ")
+    input_student_id = input("Enter student ID (number only): ")
+    n = 3 - len(input_student_id)
+    id = 'S' + input_student_id.zfill(n)
     name = input("Enter student name: ")
     math_score = int(input("Enter Math score (0-100): "))
     sci_score = int(input("Enter Science score (0-100): "))
@@ -74,6 +76,18 @@ def calculate_statistics():
             lowest_math_score = min(int(student['Math']) for student in students)
             lowest_sci_score = min(int(student['Science']) for student in students)
             lowest_eng_score = min(int(student['English']) for student in students)
+            if highest_math_score == student['Math']:
+                highest_math_student = student['Name']
+            if highest_sci_score == student['Science']:
+                highest_sci_student = student['Name']
+            if highest_eng_score == student['English']:
+                highest_eng_student = student['Name']
+            if lowest_math_score == student['Math']:
+                lowest_math_student = student['Name']
+            if lowest_sci_score == student['Science']:
+                lowest_sci_student = student['Name']
+            if lowest_eng_score == student['English']:
+                lowest_eng_student = student['Name']
 
     print(f"Total number of students: {num_students}")
     print('-'*50)
@@ -82,14 +96,14 @@ def calculate_statistics():
     print(f"Average English score: {eng_score_avg:.2f}")
     print('-'*50)
     print('Highest scores:')
-    print(f"Math: {highest_math_score}")
-    print(f"Science: {highest_sci_score}")
-    print(f"English: {highest_eng_score}")
+    print(f"Math: {highest_math_score} ({highest_math_student})")
+    print(f"Science: {highest_sci_score} ({highest_sci_student})")
+    print(f"English: {highest_eng_score} ({highest_eng_student})")
     print('-'*50)
     print('Lowest scores:')
-    print(f"Math: {lowest_math_score}")
-    print(f"Science: {lowest_sci_score}")
-    print(f"English: {lowest_eng_score}")
+    print(f"Math: {lowest_math_score} ({lowest_math_student})")
+    print(f"Science: {lowest_sci_score} ({lowest_sci_student})")
+    print(f"English: {lowest_eng_score} ({lowest_eng_student})")
     print('-'*50)
 
 def search_student(students, query):
@@ -139,7 +153,14 @@ def export_to_csv():
     print("Data exported to students.csv successfully!")
 
 while True: 
-    choice = menu()
+    try:
+        choice = menu()
+    except ValueError:
+        print("Invalid input. Please enter a number between 1 and 8.")
+        continue
+    if choice < 1 or choice > 8:
+        print("Invalid input. Please enter a number between 1 and 8.")
+        continue
     if choice == 1:
         add_student()
     elif choice == 2:
@@ -154,6 +175,7 @@ while True:
         export_to_json()
     elif choice == 7:
         export_to_csv()
-    else:
+    elif choice == 8:
         print('Thank you for using the Student Manager. Goodbye!')
         break 
+    
