@@ -7,4 +7,4 @@ TASK02 - simple student statistics calculator
 TASK03 - budget calculator  
 TASK04 - txt, json, csv converter  
 TASK05 - employee manager  
-TASK06 - 
+TASK06 - file manager
